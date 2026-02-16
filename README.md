@@ -13,16 +13,18 @@ This engine is a security-first, read-only auditing tool designed for infrastruc
 - **Cloud CLI tools** configured locally (Azure CLI, AWS CLI, or gcloud) OR **Service Principal/IAM Role** credentials.
 
 ### 2. Installation
+First, install [Poetry](https://python-poetry.org/docs/#installation). Then:
+
 ```bash
 git clone https://github.com/[TU_ORGANIZACION]/finops-audit.git
 cd finops-audit
-pip install -r requirements.txt
+poetry install
 ```
 
 ### 3. Execution
 To run a full audit across all configured providers:
 ```bash
-python main.py --all
+poetry run python main.py --all
 ```
 
 ## 🔐 Security & Permissions (Zero-Write Policy)
@@ -49,6 +51,21 @@ You can automate this audit to run every Monday at 9:00 AM using the provided wo
 1. Go to Settings > Secrets > Actions in this repo.
 2. Add your Cloud Credentials.
 3. Enable the .github/workflows/daily_audit.yml.
+
+## 🧪 Testing & Coverage
+Run unit tests with coverage:
+```bash
+poetry install
+poetry run pytest -m "not integration" --cov=. --cov-report=term-missing --cov-report=xml
+```
+
+Integration tests are optional and require cloud credentials. Enable them with:
+```bash
+RUN_AWS_INTEGRATION=true RUN_AZURE_INTEGRATION=true RUN_GCP_INTEGRATION=true poetry run pytest -m integration
+```
+
+## 📬 Contact
+For questions or access to the Pro version, reach out at bernabepuente@cloudkernel.app.
 
 ## 📄 License
 Distributed under the MIT License. See LICENSE for more information.

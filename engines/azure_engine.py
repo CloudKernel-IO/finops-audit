@@ -1,10 +1,11 @@
 """Azure audit engine placeholder."""
 
+
 import logging
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
 from azure.mgmt.network import NetworkManagementClient
-from azure.mgmt.resource import SubscriptionClient
+from azure.mgmt.subscription import SubscriptionClient
 
 logger = logging.getLogger(__name__)
 

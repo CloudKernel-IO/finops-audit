@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "finops-audit"
+version = "0.1.0"
+description = "Cloud Management & FinOps Engine to identify and eliminate cloud waste."
+authors = ["Bernabe Puente <bernabepuente@cloudkernel.app>"]
+readme = "README.md"
+packages = [{include = "engines"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+azure-identity = "*"
+azure-mgmt-compute = "*"
+azure-mgmt-network = "*"
+azure-mgmt-resource = "*"
+boto3 = "*"
+google-cloud-compute = "*"
+azure-mgmt-subscription = "^3.1.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-cov = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "integration: tests that require real cloud credentials and network access"
+]
+addopts = "-ra"
+
+[tool.coverage.run]
+branch = true
+source = ["."]
+omit = ["tests/*", ".venv/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
